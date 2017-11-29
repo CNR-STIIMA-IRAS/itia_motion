@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+  <include file="$(find itia_ur_hardware_interface)/launch/ur_hardware_interface.launch"/>
+  
+  <rosparam command="load" file="$(find itia_helios)/cfg/helios_par.yaml"/>
+  <node name="polinterpolation_node" pkg="itia_helios" type="polinterpolation_node" output="screen" >
+<!--     <remap from="ur_motion_sp" to="/cart_ctrl/target_pose"/> -->
+  </node>
+</launch>

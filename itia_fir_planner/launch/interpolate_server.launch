@@ -1,0 +1,6 @@
+<launch>
+  
+  <rosparam command="load" file="$(find itia_fir_planner)/config/fir_planner_config.yaml" />
+  <node pkg="itia_fir_planner" type="itia_fir_interpolate_server" name="itia_fir_interpolate_server"  output="screen"/>
+  
+</launch>

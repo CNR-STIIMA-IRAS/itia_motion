@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+  
+  <rosparam command="load" file="$(find itia_helios)/cfg/helios_par.yaml" />\
+
+<!--   <param  name="robot_description" textfile="$(find fourbythree_description)/urdf/prototype3.urdf" /> -->
+<!--  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" output="screen" >
+    <remap from="/joint_states" to="/joint_states_sp"/>
+    <param name="use_gui" value="true"/>
+  </node>-->
+  <node name="mpc_test" pkg="itia_helios" type="mpc_test" output="screen" >
+    <remap from="/target_joint_states" to="/sp/joint_states"/>
+  </node>
+<!--   <node name="test_ndl_node" pkg="ndlcom_driver" type="test_ndl_node" output="screen" /> -->
+<!--  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen" >
+  </node>-->
+  
+</launch>

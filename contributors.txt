@@ -1,0 +1,4 @@
+maintainer: 
+manuel.beschi@itia.cnr.it
+contributors: 
+alberto.marini@unibs.it

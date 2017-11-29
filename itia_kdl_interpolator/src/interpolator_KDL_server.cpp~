@@ -1,0 +1,25 @@
+#include "redundancy/interpolator_KDL.h"
+
+
+int main ( int argc, char** argv ) {
+
+    printf ( " [ %s%s:%d%s ]\t *********************************************\n",GREEN, __FUNCFILE__, __LINE__, RESET );
+    printf ( " [ %s%s:%d%s ]\t ******** INTERPOLATOR SERVER KDL 1.0 ********\n",GREEN, __FUNCFILE__, __LINE__, RESET );
+    printf ( " [ %s%s:%d%s ]\t *********************************************\n",GREEN, __FUNCFILE__, __LINE__, RESET );
+
+    printf ( " [ %s%s:%d%s ]\t Init ROS\n",GREEN, __FUNCFILE__, __LINE__, RESET );
+    // ------ Init ROS ------
+    ros::init ( argc, argv,"interpolator_KDL_server" );
+    ros::NodeHandle nh;
+	
+	unibs::deburring::interpolator_KDL server(&nh);
+		
+	ros::ServiceServer  loadTrj_srv=nh.advertiseService("loadTrj_KDL", &unibs::deburring::interpolator_KDL::load_trj, &server);
+	ros::ServiceServer  appendTrj_srv=nh.advertiseService("appendTrj_KDL", &unibs::deburring::interpolator_KDL::append_trj, &server);
+	ros::ServiceServer  getPose_srv=nh.advertiseService("getPose_KDL", &unibs::deburring::interpolator_KDL::getPose, &server);
+	ros::ServiceServer  reloadRefs_srv=nh.advertiseService("reloadRefs_KDL", &unibs::deburring::interpolator_KDL::reload_references, &server);
+	
+	
+	ros::spin();
+    return 0;
+}

@@ -1,0 +1,13 @@
+
+<library path="lib/libitia_helios">
+  <class name="planner/HeliosPlannerMPCAction" type="itia::helios::HeliosPlannerMPCAction" base_class_type="nodelet::Nodelet">
+  <description>
+    Helios MPC planner with Control
+  </description>
+  </class>
+<!--  <class name="planner/HeliosFIR" type="itia::helios::HeliosPlannerFIR" base_class_type="nodelet::Nodelet">
+  <description>
+    Helios FIR planner
+  </description>
+  </class>-->
+</library>

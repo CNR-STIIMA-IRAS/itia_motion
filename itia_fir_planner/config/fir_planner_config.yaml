@@ -1,0 +1,4 @@
+fir:
+  acc_vel_ratio: 10 # acc/vel
+  default_path_accuracy: 0.1
+  default_goal_accuracy: 0

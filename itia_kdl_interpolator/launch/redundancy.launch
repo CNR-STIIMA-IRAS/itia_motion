@@ -1,0 +1,5 @@
+<launch>
+	<rosparam command="load" file="$(find itia_kdl_inteprolator)/cfg/ParameterSet.yaml" /> 
+	
+	<node pkg="itia_kdl_interpolator" type="interpolator_kdl_server" name="interpolator_KDL_server" />
+</launch>

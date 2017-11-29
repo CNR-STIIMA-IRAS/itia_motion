@@ -1,0 +1,10 @@
+fir:
+  dimension: 1
+  sample_period: 0.1  
+  np: 2
+  nfir: 100
+  cruise_jnt_vel: [10]
+  path_accuracy: 0.1
+  goal_accuracy: 0
+
+

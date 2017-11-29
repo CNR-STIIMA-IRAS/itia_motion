@@ -1,0 +1,6 @@
+<launch>
+	<rosparam command="load" file="$(find itia_kdl_inteprolator)/cfg/ParameterSet.yaml" />
+	
+	<node pkg="fake_comau_robot" type="fake_generic_robot" name="fake_server" />	
+	<node pkg="itia_kdl_interpolator" type="interpolator_KDL_server" name="interpolator_KDL_server" />
+</launch>

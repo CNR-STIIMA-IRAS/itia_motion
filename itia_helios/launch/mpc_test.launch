@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" output="screen" >
+    <remap from="/joint_states" to="/joint_states_sp"/>
+  </node>
+  <node name="mpc_test" pkg="itia_helios" type="mpc_test" output="screen" >
+  </node>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen" >
+  </node>
+  
+</launch>

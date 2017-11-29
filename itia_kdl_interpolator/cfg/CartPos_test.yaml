@@ -1,0 +1,21 @@
+cart_trj:
+  nPoints: 3.0
+  feedrate: 10.0
+  cpoint0:
+    flag: ''
+    override: 50.0
+    exec_time: 4.0
+    arm_number: 2.0
+    position: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+  cpoint1:
+    flag: ''
+    override: 50.0
+    exec_time: 4.0
+    arm_number: 2.0
+    position: [0.0, 0.0, -700.0, 0.0, 0.0, 0.0]
+  cpoint2:
+    flag: ''
+    override: 50.0
+    exec_time: 2.0
+    arm_number: 2.0
+    position: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]

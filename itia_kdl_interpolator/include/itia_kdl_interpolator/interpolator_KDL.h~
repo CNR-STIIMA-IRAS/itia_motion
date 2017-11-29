@@ -1,0 +1,83 @@
+#ifndef ____INTERPOLATOR_KDL____
+#define ____INTERPOLATOR_KDL____
+
+
+#include <ros/ros.h>
+#include <itia_futils/itia_futils.h>
+#include <itia_tutils/itia_tutils.h>
+#include <itia_gutils/itia_gutils.h>
+#include <itia_comau_msgs/CncPos.h>
+#include <itia_comau_msgs/JointPos.h>
+#include <itia_comau_msgs/CartPnt.h>
+#include <itia_comau_msgs/trj.h>
+#include <redundancy_msgs/CartPnt_at_Time.h>
+#include <redundancy_msgs/reloadReferences.h>
+
+#include <math.h>
+#include <Eigen/Core>
+#include <Eigen/Dense>
+#include <Eigen/LU>
+#include <Eigen/Geometry>
+#include <kdl_parser/kdl_parser.hpp>
+#include <kdl/tree.hpp>
+#include <kdl/chain.hpp>
+#include <kdl/chainfksolverpos_recursive.hpp>
+#include <kdl/chainiksolverpos_lma.hpp>
+#include <kdl/chainjnttojacsolver.hpp>
+#include <kdl/frames.hpp>
+#include <kdl/jntarray.hpp>
+#include <kdl/jacobian.hpp>
+#include <kdl/segment.hpp>
+#include <kdl/joint.hpp>
+#include <kdl/trajectory_composite.hpp>
+#include <kdl/velocityprofile_trap.hpp>
+#include <kdl/rotational_interpolation_sa.hpp>
+#include <kdl/path_line.hpp>
+#include <kdl/trajectory_segment.hpp>
+#include <kdl/trajectory_composite.hpp>
+
+#include <exception>
+#include <iostream>
+#include "redundancy/q0_dot.h"
+#include "redundancy/find_phi.h"
+#include "redundancy/velocityProfile_TrapMerge.hpp"
+
+
+namespace unibs{
+    namespace deburring{
+    
+		class interpolator_KDL{
+			private:
+				ros::NodeHandle* m_ptr_nh;
+				ros::Rate loop_rate;
+				
+				
+				const double pi = 3.141592653589793;
+				
+				Eigen::Array<double,6,1> bframe, tframe, uframe, endstroke_pos, endstroke_neg, q_avg;
+				int err_counter = 0;
+				int arm_num = 2;
+				KDL::Chain urdf_chain;
+				KDL::Trajectory_Composite full_trj;
+				KDL::Frame actual_pos;   // posizione attuale del robot da tool a base
+				double actual_time;      // tempo dell'ultima chiamata alla funzione getPose
+				double time_offset;      // tiene traccia dei tempi quando la traiettoria viene ricaricata durante l'esecuzione
+				bool initial_pos_set = false;
+				
+			public:
+				interpolator_KDL(ros::NodeHandle* ptr_nh);
+				~interpolator_KDL(){};
+				bool load_trj( itia_comau_msgs::trj::Request& req, itia_comau_msgs::trj::Response& res);
+				bool append_trj( itia_comau_msgs::trj::Request& req, itia_comau_msgs::trj::Response& res);
+				bool getPose( redundancy_msgs::CartPnt_at_Time::Request& req, redundancy_msgs::CartPnt_at_Time::Response& res );
+				
+				bool reload_references(redundancy_msgs::reloadReferences::Request& req, redundancy_msgs::reloadReferences::Response& res);
+				
+				void currentPos_cb(const itia_comau_msgs::CartPnt::ConstPtr& pos);
+				
+		};
+				
+	}
+}
+	
+#endif
